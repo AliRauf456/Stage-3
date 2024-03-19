@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Header navigation styles */
+
+header {
+    background-color: #67DC89; /* Green color */
+    padding: 30px 0; /* Add padding to top and bottom */
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline-block;
+}
+
+header nav ul li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+header nav ul li a:hover {
+    background-color: #2db734;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+    display: block;
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+input[type="submit"] {
+    background-color: #67DC89;
+    color: #fff;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #1ea537;
+}
+p {
+    text-align: center;
+}
+
+.left-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 10%; /* Adjust width as needed */
+    background-color: #4CAF50; /* Green color */
+    z-index: -1; /* Move behind other content */
+}
+
+.right-background {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 10%; /* Adjust width as needed */
+    background-color: #4CAF50; /* Green color */
+    z-index: -1; /* Move behind other content */
+}
+
+
+
