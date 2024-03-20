@@ -29,3 +29,8 @@ document.querySelector('form').addEventListener('submit', function(event) {
         alert('Failed to process login. Please try again (Placeholder message: Youll find this part of the code in broker-login.js ');
     });
 });
+
+//So far only the alert for failed to "process login, please try again" 
+//has been showing up when testing site
+//not sure if its because its not able to connect to a database or not
+// so hopefully if connected it'll show other results
