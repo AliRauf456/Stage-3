@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/alirauf/Desktop/MortgageSystem/MortgageSystem.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2486"/><column_width id="4" width="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:mainBroker"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE &quot;mortgage_product&quot; (
+    &quot;mortgage_product_id&quot; INTEGER PRIMARY KEY,
+    &quot;lender_id&quot; INTEGER NOT NULL,
+    &quot;broker_id&quot; INTEGER NOT NULL,
+    &quot;product_name&quot; VARCHAR(100) NOT NULL,
+    &quot;interest_rate&quot; DECIMAL(5, 2) NOT NULL,
+    &quot;loan_term&quot; INT NOT NULL,
+    &quot;maximum_loan_amount&quot; DECIMAL(15, 2) NOT NULL,
+    &quot;minimum_down_payment&quot; DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (&quot;lender_id&quot;) REFERENCES &quot;lenders&quot; (&quot;lender_id&quot;),
+    FOREIGN KEY (&quot;broker_id&quot;) REFERENCES &quot;brokers&quot; (&quot;broker_id&quot;)
+);
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
