@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Mortgage Product</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home-page-prospective.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="create-account.html">Create an Account</a></li>
+                <li><a href="broker-login.html">Employee Login</a></li>
+                <li><a href="mortgage-product.html">Mortgage-product</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="left-background"></div> 
+    <div class="right-background"></div> 
+
+    <div class="title-container">
+        <h1>Create Mortgage Product</h1>
+        <h2 style="text-align: center;">Create Minimum Criteria for Product</h2>
+    </div>
+
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="occupation">Type of Occupation:</label>
+                <select id="occupation" name="occupation">
+                    <option value="working">Working Class</option>
+                    <option value="middle">Middle Class</option>
+                    <option value="upper">Upper Class</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label for="income">Annual Income:</label>
+                <input type="text" id="income" name="income" placeholder="Enter annual income">
+            </div>
+
+            <div class="form-group">
+                <label for="expenditure">Annual Expenditure:</label>
+                <input type="text" id="expenditure" name="expenditure" placeholder="Enter annual expenditure">
+            </div>
+
+            <div class="form-group">
+                <label for="credit-score">Credit Score:</label>
+                <input type="text" id="credit-score" name="credit-score" placeholder="Enter credit score">
+            </div>
+
+            <div class="create-button">
+                <a href="mortgage-product.html">Create Product</a>
+            </div>            
+        </form>
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Broker Login</title>
+    <title>Mortgage Products</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,26 +21,28 @@
 
     <div class="left-background"></div> 
     <div class="right-background"></div> 
-    
+
+    <div class="title-container">
+        <h1>Mortgage Products</h1>
+    </div>
+
     <div class="container">
-        <header>
-            <h1>Broker Login</h1>
-        </header>
-        <div class="content">
-            <form>
-                <div style="margin-top: 20px;"> 
-                    <label for="employeeID">Employee ID:</label>
-                </div>
-                <input type="text" id="employeeID" name="employeeID" placeholder="Enter your employee ID">
+        <div class="product-grid">
+            <div class="product-box">
+                <h2>Mortgage Product 1</h2>
+                <p>Placeholder description</p>
+            </div>
+            <div class="product-box">
+                <h2>Mortgage Product 2</h2>
+                <p>Placeholder description</p>
+            </div>
+            <!-- Add more product boxes if needed guys -->
+        </div>
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password">
-
-                <input type="submit" value="Login">
-            </form>
-            <div id="errorMessage"></div> 
+        <!-- Button to create a new mortgage product -->
+        <div class="create-button">
+            <a href="create-mortgage-product.html">Create Mortgage Product</a>
         </div>
     </div>
-    <script src="broker-login.js"></script>
 </body>
 </html>
