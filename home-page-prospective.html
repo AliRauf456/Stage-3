@@ -1,7 +1,18 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="styles.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newcomer Mortgage Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add any additional styles here */
+    </style>
+</head>
+
+<body>
     <header>
         <nav>
             <ul>
@@ -13,28 +24,43 @@
             </ul>
         </nav>
     </header>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Newcomer Mortgage Calculator</title>
-    <style>
-    </style>
-</head>
-<body>
-    <div class="container">
 
-        <div class="left-background"></div> 
-        <div class="right-background"></div> 
-        
+    <div class="container">
+        <div class="left-background"></div>
+        <div class="right-background"></div>
+
         <h1>Newcomer Mortgage Calculator</h1>
         <p>Please enter your income and expenditure values here to calculate an estimate on how much you can borrow.</p>
-        <form>
+        <form id="loanForm">
             <input type="text" id="income" name="income" placeholder="Income">
             <input type="text" id="expenditure" name="expenditure" placeholder="Expenditure">
             <input type="submit" value="Confirm">
         </form>
+
+        <div id="result"></div>
     </div>
+
+    <script>
+        document.getElementById("loanForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get values from form inputs
+            var income = parseFloat(document.getElementById("income").value);
+            var expenditure = parseFloat(document.getElementById("expenditure").value);
+
+            // Check if expenditure is higher than income
+            if (expenditure > income) {
+                // Show error message
+                document.getElementById("result").innerHTML = "<p>Error: Higher Income Expenditure. You are ineligible for a loan at the moment.</p>";
+            } else {
+                // Calculate loan amount (Example: 80% of income)
+                var loanAmount = 0.8 * income;
+
+                // Show loan eligibility message
+                document.getElementById("result").innerHTML = "<p>Based on your income and expenditure, you are eligible to borrow up to $" + loanAmount.toFixed(2) + ".</p>";
+            }
+        });
+    </script>
 </body>
 
-<script> src="prospective-user.js"</script>
 </html>
