@@ -11,7 +11,7 @@ document.getElementById("loanForm").addEventListener("submit", function(event) {
         document.getElementById("result").innerHTML = "<p>Error: Higher Income Expenditure. You are ineligible for a loan at the moment.</p>";
     } else {
         // Calculate loan amount (Example: 80% of income)
-        var loanAmount = 0.8 * income; // You can adjust the calculation based on your requirements
+        var loanAmount = 0.8 * income;
 
         // Show loan eligibility message
         document.getElementById("result").innerHTML = "<p>Based on your income and expenditure, you are eligible to borrow up to $" + loanAmount.toFixed(2) + ".</p>";
