@@ -28,7 +28,7 @@
     </div>
 
     <div class="container">
-        <form method="post" action="product.php">
+        <form method="post" action="create-product.php">
             <div class="form-group">
                 <label for="product_name">Product Name:</label>
                 <input type="text" id="product_name" name="product_name" placeholder="Enter Product Name" required>
@@ -55,9 +55,22 @@
             </div>
 
             <div class="create-button">
-                <button type="submit">Create Mortgage Product</button>
+                <button type="submit" name="submit_form">Create Mortgage Product</button>
             </div>
         </form>
     </div>
+
+    <!-- Include any PHP code here if needed -->
+
+    <script>
+        // JavaScript to redirect back to the previous page after form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                window.history.back(); // Redirect back to the previous page
+            });
+        });
+    </script>
 </body>
 </html>
