@@ -6,7 +6,7 @@ if(!$db) {
     die("Connection failed: " . $db->lastErrorMsg());
 }
 
-$sql="select * From user";
+$sql="select * From User";
 $stmt=$conn->prepare($sql);
 $stmt->execute();
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
