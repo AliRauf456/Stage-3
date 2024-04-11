@@ -3,7 +3,7 @@ $database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/MortgageSystem.s
 $db = new SQLite3($database_file);
 if(!$db) {
     die("Connection failed: " . $db->lastErrorMsg());
-}
+}oihfowehfoiwe
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
