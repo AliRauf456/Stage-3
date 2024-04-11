@@ -1,7 +1,6 @@
 <?php
 //$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/";
-$database_file="Stage3db"
-new
+$database_file="Stage3db";
 $db = new PDOSQLite3(sqlite:$database_file);
 if(!$db) {
     die("Connection failed: " . $db->lastErrorMsg());
