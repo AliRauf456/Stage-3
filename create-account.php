@@ -1,5 +1,5 @@
 <?php
-$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/MortgageSystem.db.spl";
+$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/MortgageSystem.db.sql";
 $db = new SQLite3($database_file);
 if(!$db) {
     die("Connection failed: " . $db->lastErrorMsg());
