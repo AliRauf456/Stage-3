@@ -1,8 +1,19 @@
 <?php
-$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/MortgageSystem.sqbpro";
-$db = new SQLite3($database_file);
+//$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/";
+$database_file="Stage3db";
+$db = new PDOSQLite3(sqlite:$database_file);
 if(!$db) {
     die("Connection failed: " . $db->lastErrorMsg());
+}
+
+$sql="select * From user";
+$stmt=$conn->prepare($sql);
+$stmt->execute();
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if ($rows){
+    foreach ($rows as $row) {
+        echo $row["firstname"];
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -21,17 +32,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     $stmt = $db->prepare("INSERT INTO user (firstname, surname, email, password) VALUES (:firstname, :surname, :email, :password)");
+    if (!$stmt) {
+        die("Error preparing statement: " . $db->lastErrorMsg());
+    }
+
     $stmt->bindParam(':firstname', $firstname);
     $stmt->bindParam(':surname', $surname);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashed_password);
-
-    $result = $stmt->execute();
-
-    if ($result) {
-        echo "Account created successfully.";
-    } else {
-        echo "Error creating account.";
+    if (!$stmt->execute()) {
+        die("Error executing statement: " . $stmt->lastErrorMsg());
     }
+
+    echo "Account created successfully.";
 }
 ?>
