@@ -1,7 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 $database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/MortgageSystem.sqbpro";
 $db = new SQLite3($database_file);
 if(!$db) {
@@ -23,18 +20,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+    // Prepare SQL statement with error handling
     $stmt = $db->prepare("INSERT INTO user (firstname, surname, email, password) VALUES (:firstname, :surname, :email, :password)");
+    if (!$stmt) {
+        die("Error preparing statement: " . $db->lastErrorMsg());
+    }
+
+    // Bind parameters with error handling
     $stmt->bindParam(':firstname', $firstname);
     $stmt->bindParam(':surname', $surname);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashed_password);
-
-    $result = $stmt->execute();
-
-    if ($result) {
-        echo "Account created successfully.";
-    } else {
-        echo "Error creating account.";
+    if (!$stmt->execute()) {
+        die("Error executing statement: " . $stmt->lastErrorMsg());
     }
+
+    echo "Account created successfully.";
 }
 ?>
