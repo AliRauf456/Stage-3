@@ -1,6 +1,11 @@
 <?php
-// Establish a connection to your database
-$database_file = "your_database_file.db"; // Change this to your SQLite database file
+$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/MortgageSystem.sqbpro";
+$db = new SQLite3($database_file);
+if(!$db) {
+    die("Connection failed: " . $db->lastErrorMsg());
+}
+
+$database_file = "your_database_file.db"; 
 $db = new SQLite3($database_file);
 
 // Check if the form is submitted
@@ -12,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
 
-    // Validate form data (you can add more validation as needed)
+    // Validate form data
     if ($password !== $confirmPassword) {
         echo "Passwords do not match.";
         exit();
