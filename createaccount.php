@@ -13,4 +13,5 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if ($rows){
     foreach ($rows as $row) {
         echo $row["firstname"];
+        
     }}
