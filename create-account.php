@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/MortgageSystem.sqbpro";
 $db = new SQLite3($database_file);
 if(!$db) {
