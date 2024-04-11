@@ -1,8 +1,20 @@
 <?php
-$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/MortgageSystem.db.sql";
-$db = new SQLite3($database_file);
+//$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/";
+$database_file="Stage3db"
+new
+$db = new PDOSQLite3(sqlite:$database_file);
 if(!$db) {
     die("Connection failed: " . $db->lastErrorMsg());
+}
+
+$sql="select * From user";
+$stmt=$conn->prepare($sql);
+$stmt->execute();
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if ($rows){
+    foreach ($rows as $row) {
+        echo $row["firstname"];
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
