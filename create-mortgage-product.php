@@ -14,7 +14,7 @@
                 <li><a href="login.html">Login</a></li>
                 <li><a href="create-account.html">Create an Account</a></li>
                 <li><a href="broker-login.html">Broker Login</a></li>
-                <li><a href="mortgage-product.html">Mortgage Product</a></li>
+                <li><a href="mortgage-product.php">Mortgage Product</a></li>
             </ul>
         </nav>
     </header>
@@ -28,7 +28,42 @@
     </div>
 
     <div class="container">
-        <form method="post" action="create-product.php">
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $productName = $_POST['product_name'];
+            $interestRate = $_POST['interest_rate'];
+            $loanTerm = $_POST['loan_term'];
+            $maximumLoanAmount = $_POST['maximum_loan_amount'];
+            $minimumDownPayment = $_POST['minimum_down_payment'];
+
+
+            if (!is_numeric($interestRate) || !is_numeric($maximumLoanAmount) || !ctype_digit($loanTerm) || !is_numeric($minimumDownPayment)) {
+                echo "Invalid input. Please enter valid numeric values for interest rate, maximum loan amount, loan term (a positive integer), and minimum down payment.";
+            } else if (!ctype_alpha(str_replace(' ', '', $productName))) {
+                echo "Invalid product name. Product name should only contain letters and spaces.";
+            } else {
+                $db = new PDO("sqlite:C:/xampp/Data/Mortgage Database.db");
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $sql = "INSERT INTO mortgage_products (product_name, interest_rate, loan_term, maximum_loan_amount, minimum_down_payment) VALUES (:product_name, :interest_rate, :loan_term, :maximum_loan_amount, :minimum_down_payment)";
+
+                $stmt = $db->prepare($sql);
+
+                $stmt->bindParam(':product_name', $productName);
+                $stmt->bindParam(':interest_rate', $interestRate);
+                $stmt->bindParam(':loan_term', $loanTerm);
+                $stmt->bindParam(':maximum_loan_amount', $maximumLoanAmount);
+                $stmt->bindParam(':minimum_down_payment', $minimumDownPayment);
+
+                if ($stmt->execute()) {
+                    echo "Mortgage product created successfully!";
+                } else {
+                    echo "Error creating mortgage product. Please try again.";
+                }
+            }
+        }
+        ?>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div class="form-group">
                 <label for="product_name">Product Name:</label>
                 <input type="text" id="product_name" name="product_name" placeholder="Enter Product Name" required>
@@ -57,20 +92,3 @@
             <div class="create-button">
                 <button type="submit" name="submit_form">Create Mortgage Product</button>
             </div>
-        </form>
-    </div>
-
-    <!-- Include any PHP code here if needed -->
-
-    <script>
-        // JavaScript to redirect back to the previous page after form submission
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
-                window.history.back(); // Redirect back to the previous page
-            });
-        });
-    </script>
-</body>
-</html>
