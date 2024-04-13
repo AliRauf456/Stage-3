@@ -6,7 +6,6 @@ if(!$db) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
     $firstname = $_POST['firstName'];
     $surname = $_POST['surname'];
     $email = $_POST['email'];
@@ -20,13 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Prepare SQL statement with error handling
-    $stmt = $db->prepare("INSERT INTO user (firstname, surname, email, password) VALUES (:firstname, :surname, :password, :email)");
+    $stmt = $db->prepare("INSERT INTO user (firstname, surname, email, password) VALUES (:firstname, :surname, :email, :password)");
     if (!$stmt) {
         die("Error preparing statement: " . $db->lastErrorMsg());
     }
 
-    // Bind parameters with error handling
     $stmt->bindParam(':firstname', $firstname);
     $stmt->bindParam(':surname', $surname);
     $stmt->bindParam(':email', $email);
