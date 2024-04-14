@@ -35,3 +35,51 @@
     </div>
 </body>
 </html>
+<?php
+    // Assuming you have a database connection established
+    // You should replace these with your actual database connection code
+    $path = 'C:\xampp\htdocs\Stage-3-main data\data.db';
+    $realPath = realpath($path);
+
+    // Check if the form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Retrieve form data
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        // Check if the database file exists
+        if ($realPath === false) {
+            die("The database file does not exist.");
+        }
+
+        // Open SQLite database connection
+        $db = new SQLite3($realPath);
+
+        // Check if the connection is successful
+        if (!$db) {
+            echo "Error: Unable to open database.";
+        } else {
+            // Query the user table to check if the provided credentials are valid
+            $query = "SELECT * FROM user WHERE email=:email AND password=:password";
+            $stmt = $db->prepare($query);
+            $stmt->bindValue(':email', $email, SQLITE3_TEXT);
+            $stmt->bindValue(':password', $password, SQLITE3_TEXT);
+            $result = $stmt->execute();
+
+            // Check if the query returns any rows
+            if ($result->fetchArray(SQLITE3_ASSOC)) {
+                // Redirect to another page upon successful login
+                header("Location: home-page.html"); // Change 'dashboard.php' to your desired page
+                exit();
+            } else {
+                // Handle invalid credentials
+                echo "Invalid email or password.";
+            }
+
+            // Close the database connection
+            $db->close();
+        }
+    }
+    ?>
+</body>
+</html>
