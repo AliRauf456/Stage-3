@@ -1,41 +1,77 @@
-<?php
-// Ali, replace tthe values with your actual database credentials
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$database = "your_database";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broker Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="home-page-prospective.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="create-account.html">Create an Account</a></li>
+                <li><a href="broker-login.php">Broker Login</a></li>
+                <li><a href="mortgage-product.php">Mortgage-product</a></li>
+            </ul>
+        </nav>
+    </header>
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Retrieve data
-$brokerID = $_POST['brokerID']; // not sure what the ID in the database looks like. could you change it if its necessary Ali
-$password = $_POST['password'];
-
-$sql = "SELECT * FROM broker WHERE broker_id = '$brokerID'";
-$result = $conn->query($sql);
-
-// Check if broker exists
-if ($result->num_rows > 0) {
-    // Broker exists
-    $row = $result->fetch_assoc();
+    <div class="left-background"></div> 
+    <div class="right-background"></div> 
     
-    // Verify password
-    if (password_verify($password, $row['password'])) {
-        // Successful login
-        // You can probably add additional broker details 
-        echo json_encode(array('success' => true, 'broker' => $row));
-    } else {
-        // login didn't work (invalid password)
-        echo json_encode(array('success' => false, 'message' => 'Invalid password.'));
-    }
-} else {
-    // broker not found
-    echo json_encode(array('success' => false, 'message' => 'Broker not found.'));
-}
+    <div class="container">
+        <header>
+            <h1>Broker Login</h1>
+        </header>
+        <div class="content">
+            <?php
+            // Check if form is submitted
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                // Get form data
+                $employeeID = $_POST['employeeID'];
+                $password = $_POST['password'];
 
-$conn->close();
-?>
+                // Connect to the database
+                $db = new PDO("sqlite:C:/xampp/Data/Mortgage Database.db");
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                // Prepare SQL statement
+                $stmt = $db->prepare("SELECT * FROM broker WHERE brokerid = :employeeID AND password = :password");
+
+                // Bind parameters and execute the statement
+                $stmt->bindParam(':employeeID', $employeeID);
+                $stmt->bindParam(':password', $password);
+                $stmt->execute();
+
+                // Fetch matching row
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                // Check if a row was found
+                if ($row) {
+                    // Redirect to mortgage-product.php
+                    header("Location: mortgage-product.php");
+                    exit();
+                } else {
+                    // Display error message
+                    echo "<div id='errorMessage'>Invalid Employee ID or Password.</div>";
+                }
+            }
+            ?>
+            <form method="post">
+                <div style="margin-top: 20px;"> 
+                    <label for="employeeID">Employee ID:</label>
+                </div>
+                <input type="text" id="employeeID" name="employeeID" placeholder="Enter your employee ID" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
