@@ -39,8 +39,8 @@
         <nav>
             <ul>
                 <li><a href="home-page-prospective.html">Home</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="create-account.html">Create an Account</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="create-account.php">Create an Account</a></li>
                 <li><a href="broker-login.php">Broker Login</a></li>
                 <li><a href="mortgage-product.php">Mortgage Products</a></li>
             </ul>
@@ -73,7 +73,7 @@
                     $db = new PDO("sqlite:C:/xampp/Data/Isaac Database.db");
                     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                    $sql = "SELECT mortgage_product_id, product_name, interest_rate, loan_term, maximum_loan_amount, minimum_down_payment FROM mortgage_products";
+                    $sql = "SELECT mortgage_product_id, product_name, interest_rate, loan_term, maximum_loan_amount, minimum_down_payment FROM mortgage_product";
 
                     $stmt = $db->prepare($sql);
 
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_products'])) {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-        $sql = "DELETE FROM mortgage_products WHERE mortgage_product_id IN (".implode(',', $_POST['selected_products']).")";
+        $sql = "DELETE FROM mortgage_product WHERE mortgage_product_id IN (".implode(',', $_POST['selected_products']).")";
 
         if ($db->exec($sql) !== false) {
             echo "<script>alert('Selected products deleted successfully!');</script>";

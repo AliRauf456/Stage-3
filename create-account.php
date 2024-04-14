@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Form Submission Result</title>
+    <title>Create Account</title>
 </head>
 <body>
     <header>
@@ -12,95 +12,86 @@
             <ul>
                 <li><a href="home-page-prospective.html">Home</a></li>
                 <li><a href="login.php">Login</a></li>
-                <li><a href="create-account.html">Create an Account</a></li>
-                <li><a href="broker-login.html">broker Login</a></li>
+                <li><a href="create-account.php">Create an Account</a></li>
+                <li><a href="broker-login.php">Broker Login</a></li>
+                <li><a href="mortgage-product.php">Mortgage-product</a></li>
             </ul>
         </nav>
     </header>
-<body>
 
-    <title>Form Submission Result</title>
+    <div class="container">
+        <div class="left-background"></div> 
+        <div class="right-background"></div> 
+        <h1>Create an Account</h1>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <input type="text" id="firstname" name="firstname" placeholder="Enter your First Name">
+            <input type="text" id="surname" name="surname" placeholder="Enter your Surname">
+            <input type="email" id="email" name="email" placeholder="Enter your Email">
+            <input type="password" id="password" name="password" placeholder="Enter your Password">
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your Password">
+            <input type="submit" value="Create Account">
+        </form>
 
-<body>
-    <h1>Form Submission Result</h1>
+        <?php
+        // Path validation
+        $path = 'C:\xampp\Data\Isaac Database.db';
+        $realPath = realpath($path);
 
-    <?php
-    // Your PHP code here
+        if ($realPath === false) {
+            die("The path '$path' does not exist.");
+        }
 
-    // Path validation
-    $path = 'C:\xampp\htdocs\Stage-3-main data\data.db';
-    $realPath = realpath($path);
+        // Check if the form is submitted
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Retrieve user input from the form
+            $firstname = $_POST["firstname"];
+            $surname = $_POST["surname"];
+            $password = $_POST["password"];
+            $email = $_POST["email"];
 
-    if ($realPath === false) {
-        die("The path '$path' does not exist.");
-    }
-
-    // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Retrieve user input from the form
-        $firstname = $_POST["firstname"];
-        $surname = $_POST["surname"];
-        $password = $_POST["password"];
-        $email = $_POST["email"];
-
-        // Check if form fields are not empty
-        if (empty($firstname) || empty($surname) || empty($password) || empty($email)) {
-            echo "Error: Please fill in all fields.";
-        } else {
-            // Connect to the SQLite database
-            $db = new SQLite3($path);
-
-            // Check if the connection is successful
-            if (!$db) {
-                echo "Error: Unable to open database.";
+            // Check if form fields are not empty
+            if (empty($firstname) || empty($surname) || empty($password) || empty($email)) {
+                echo "Error: Please fill in all fields.";
             } else {
-                // Prepare the INSERT statement
-                $stmt = $db->prepare("INSERT INTO user (firstname, surname, password, email) VALUES (:firstname, :surname, :password, :email)");
+                // Connect to the SQLite database
+                $db = new SQLite3($path);
 
-                // Check if the statement was prepared successfully
-                if (!$stmt) {
-                    echo "Error: Unable to prepare statement.";
+                // Check if the connection is successful
+                if (!$db) {
+                    echo "Error: Unable to open database.";
                 } else {
-                    // Bind parameters
-                    $stmt->bindParam(':firstname', $firstname);
-                    $stmt->bindParam(':surname', $surname);
-                    $stmt->bindParam(':password', $password);
-                    $stmt->bindParam(':email', $email);
+                    // Prepare the INSERT statement
+                    $stmt = $db->prepare("INSERT INTO user (firstname, surname, password, email) VALUES (:firstname, :surname, :password, :email)");
 
-                    // Execute the statement
-                    $result = $stmt->execute();
-
-                    // Check if the insertion was successful
-                    if ($result) {
-                        echo "User added successfully.";
+                    // Check if the statement was prepared successfully
+                    if (!$stmt) {
+                        echo "Error: Unable to prepare statement.";
                     } else {
-                        echo "Error: Unable to add user.";
-                    }
+                        // Bind parameters
+                        $stmt->bindParam(':firstname', $firstname);
+                        $stmt->bindParam(':surname', $surname);
+                        $stmt->bindParam(':password', $password);
+                        $stmt->bindParam(':email', $email);
 
-                    // Close the statement and the database connection
-                    $stmt->close();
-                    $db->close();
-                    header("Location:login.php");
+                        // Execute the statement
+                        $result = $stmt->execute();
+
+                        // Check if the insertion was successful
+                        if ($result) {
+                            echo "Your account has been successfully created.";
+                        } else {
+                            echo "Error: Unable to create your account.";
+                        }
+
+                        // Close the statement and the database connection
+                        $stmt->close();
+                        $db->close();
+                        header("Location: login.php");
+                    }
                 }
             }
         }
-    }
-    ?>
-
-    <form method="post" action="">
-        <label for="firstname">First Name:</label>
-        <input type="text" id="firstname" name="firstname"><br>
-
-        <label for="surname">Surname:</label>
-        <input type="text" id="surname" name="surname"><br>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password"><br>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email"><br>
-
-        <input type="submit" value="Submit">
-    </form>
+        ?>
+    </div>
 </body>
 </html>
