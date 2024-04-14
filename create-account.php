@@ -1,11 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Change file permissions to allow write access
-$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/data.db";
-chmod($database_file, 0664); // Change permissions to allow read/write by owner and group
-
+$database_file = "/Applications/XAMPP/xamppfiles/htdocs/Stage-3/Mortgage Database.db";
 $db = new SQLite3($database_file);
 if(!$db) {
     die("Connection failed: " . $db->lastErrorMsg());
