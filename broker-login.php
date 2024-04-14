@@ -28,34 +28,25 @@
         </header>
         <div class="content">
             <?php
-            // Check if form is submitted
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                // Get form data
                 $employeeID = $_POST['employeeID'];
                 $password = $_POST['password'];
 
-                // Connect to the database
                 $db = new PDO("sqlite:C:/xampp/Data/Mortgage Database.db");
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                // Prepare SQL statement
                 $stmt = $db->prepare("SELECT * FROM broker WHERE brokerid = :employeeID AND password = :password");
 
-                // Bind parameters and execute the statement
                 $stmt->bindParam(':employeeID', $employeeID);
                 $stmt->bindParam(':password', $password);
                 $stmt->execute();
 
-                // Fetch matching row
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                // Check if a row was found
                 if ($row) {
-                    // Redirect to mortgage-product.php
                     header("Location: mortgage-product.php");
                     exit();
                 } else {
-                    // Display error message
                     echo "<div id='errorMessage'>Invalid Employee ID or Password.</div>";
                 }
             }
