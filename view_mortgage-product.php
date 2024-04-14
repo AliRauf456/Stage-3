@@ -44,7 +44,7 @@
     // Your PHP code here
 
     // Path to the SQLite database
-    $path = 'C:\xampp\htdocs\Stage-3-main data\data.db';
+    $path = 'C:/xampp/htdocs/Stage-3-1/Isaac Database.db';
     $realPath = realpath($path);
 
     if ($realPath === false) {
