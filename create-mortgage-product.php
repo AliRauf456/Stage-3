@@ -42,7 +42,7 @@
             } else if (!ctype_alpha(str_replace(' ', '', $productName))) {
                 echo "Invalid product name. Product name should only contain letters and spaces.";
             } else {
-                $db = new PDO("sqlite:C:/xampp/Data/Mortgage Database.db");
+                $db = new PDO("sqlite:C:/xampp/Data/Isaac Database.db");
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 $sql = "INSERT INTO mortgage_products (product_name, interest_rate, loan_term, maximum_loan_amount, minimum_down_payment) VALUES (:product_name, :interest_rate, :loan_term, :maximum_loan_amount, :minimum_down_payment)";
