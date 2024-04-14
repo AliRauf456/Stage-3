@@ -38,7 +38,7 @@
 <?php
     // Assuming you have a database connection established
     // You should replace these with your actual database connection code
-    $path = 'C:\xampp\htdocs\Stage-3-main data\Isaac Database.db';
+    $path = 'C:/xampp/htdocs/Stage-3-1/Isaac Database.db';
     $realPath = realpath($path);
 
     // Check if the form is submitted
