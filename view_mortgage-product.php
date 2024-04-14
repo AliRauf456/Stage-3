@@ -20,12 +20,18 @@
 <body>
     <header>
     <nav>
-        <ul>
-            <li><a href="home-page.html">Home</a></li>
-            <li><a href="view_mortgage-product.php">Mortgage-product</a></li>
-        </ul>
+            <ul>
+                <li><a href="home-page-prospective.html">Home</a></li>
+                <li><a href="login.php">Login</a></li>
+                <li><a href="create-account.php">Create an Account</a></li>
+                <li><a href="broker-login.php">Broker Login</a></li>
+                <li><a href="mortgage-product.php">Mortgage Products</a></li>
+            </ul>
     </nav>
 </header>
+<div class="container">
+        <div class="left-background"></div> 
+        <div class="right-background"></div> 
 
     <form method="post">
         <label for="down_payment">Down Payment:</label>
