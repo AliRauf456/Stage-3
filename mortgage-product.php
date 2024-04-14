@@ -70,7 +70,7 @@
                 </thead>
                 <tbody>
                     <?php
-                    $db = new PDO("sqlite:C:/xampp/Data/Isaac Database.db");
+                    $db = new PDO("sqlite:C:/xampp/htdocs/Stage-3-1/Isaac Database.db");
                     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                     $sql = "SELECT mortgage_product_id, product_name, interest_rate, loan_term, maximum_loan_amount, minimum_down_payment FROM mortgage_product";
@@ -113,7 +113,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_products'])) {
 
     if (isset($_POST['selected_products'])) {
-        $db = new PDO("sqlite:C:/xampp/Data/Mortgage Database.db");
+        $db = new PDO("sqlite:C:/xampp/htdocs/Stage-3-1/Isaac Database.db");
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 

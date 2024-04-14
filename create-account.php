@@ -14,7 +14,7 @@
                 <li><a href="login.php">Login</a></li>
                 <li><a href="create-account.php">Create an Account</a></li>
                 <li><a href="broker-login.php">Broker Login</a></li>
-                <li><a href="mortgage-product.php">Mortgage-product</a></li>
+                <li><a href="mortgage-product.php">Mortgage Product</a></li>
             </ul>
         </nav>
     </header>
@@ -34,7 +34,7 @@
 
         <?php
         // Path validation
-        $path = 'C:\xampp\Data\Isaac Database.db';
+        $path = 'C:\xampp\htdocs\Stage-3-1\Isaac Database.db';
         $realPath = realpath($path);
 
         if ($realPath === false) {
@@ -86,7 +86,6 @@
                         // Close the statement and the database connection
                         $stmt->close();
                         $db->close();
-                        header("Location: login.php");
                     }
                 }
             }
