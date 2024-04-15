@@ -21,7 +21,6 @@
     <header>
     <nav>
             <ul>
-                <li><a href="home-page-prospective.html">Home</a></li>
                 <li><a href="log-out.html">Sign Out</a></li>
             </ul>
     </nav>
@@ -91,11 +90,11 @@
                     // Display mortgage products within the specified range
                     while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                         echo '<div class="mortgage-product">';
-                        echo '<div class="product-details">Product Name: ' . $row["product_name"] . '</div>';
+                        echo '<div class="product-details">Mortgage Type: ' . $row["product_name"] . '</div>';
                         echo '<div class="product-details">Interest Rate: ' . $row["interest_rate"] . '%</div>';
                         echo '<div class="product-details">Loan Term: ' . $row["loan_term"] . ' years</div>';
-                        echo '<div class="product-details">Maximum Loan Amount: $' . $row["maximum_loan_amount"] . '</div>';
-                        echo '<div class="product-details">Minimum Down Payment: $' . $row["minimum_down_payment"] . '</div>';
+                        echo '<div class="product-details">Maximum Loan Amount: £' . $row["maximum_loan_amount"] . '</div>';
+                        echo '<div class="product-details">Minimum Down Payment: £' . $row["minimum_down_payment"] . '</div>';
                         echo '</div>';
                     }
                 } else {

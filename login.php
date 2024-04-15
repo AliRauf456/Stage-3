@@ -4,6 +4,9 @@
     $path = 'C:/xampp/htdocs/Stage-3-1/Isaac Database.db';
     $realPath = realpath($path);
 
+    // Initialize error message variable
+    $error_message = "";
+
     // Check if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve form data
@@ -20,7 +23,7 @@
 
         // Check if the connection is successful
         if (!$db) {
-            echo "Error: Unable to open database.";
+            $error_message = "Error: Unable to open database.";
         } else {
             // Query the user table to check if the provided credentials are valid
             $query = "SELECT * FROM user WHERE email=:email AND password=:password";
@@ -30,13 +33,13 @@
             $result = $stmt->execute();
 
             // Check if the query returns any rows
-            if ($result->fetchArray(SQLITE3_ASSOC)) {
+            if (!$result->fetchArray(SQLITE3_ASSOC)) {
+                // Set error message
+                $error_message = "Invalid email or password.";
+            } else {
                 // Redirect to another page upon successful login
                 header("Location: view_mortgage-product.php"); // Change 'dashboard.php' to your desired page
                 exit();
-            } else {
-                // Handle invalid credentials
-                echo "Invalid email or password.";
             }
 
             // Close the database connection
@@ -73,6 +76,11 @@
         .broker-login-button:hover {
             background-color: #0056b3;
         }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -96,6 +104,10 @@
             <input type="password" id="password" name="password" placeholder="Password">
             <input type="submit" value="Confirm">
         </form>
+
+        <div class="error-message">
+            <?php echo $error_message; ?>
+        </div>
 
         <!-- Broker Login Box -->
         <div class="broker-login-box">

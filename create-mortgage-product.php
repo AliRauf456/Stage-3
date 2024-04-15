@@ -9,12 +9,9 @@
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="home-page-prospective.html">Home</a></li>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="create-account.php">Create an Account</a></li>
-                <li><a href="broker-login.php">Broker Login</a></li>
-                <li><a href="mortgage-product.php">Mortgage Product</a></li>
+        <ul>
+            <li><a href="mortgage-product.php">Home</a></li>
+                <li><a href="broker-log-out.html">Sign Out</a></li>
             </ul>
         </nav>
     </header>
