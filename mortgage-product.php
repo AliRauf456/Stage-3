@@ -60,8 +60,8 @@
                         <th>Product Name</th>
                         <th>Interest Rate</th>
                         <th>Loan Term</th>
-                        <th>Maximum Loan Amount</th>
-                        <th>Minimum Down Payment</th>
+                        <th>Loan Amount</th>
+                        <th>Down Payment</th>
                         <th>Select</th>
                     </tr>
                 </thead>
