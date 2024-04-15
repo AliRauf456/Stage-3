@@ -47,9 +47,7 @@
         <h1>Login</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="text" id="email" name="email" placeholder="Email">
-            <br><br>
             <input type="password" id="password" name="password" placeholder="Password">
-            <br><br>
             <input type="submit" value="Confirm">
         </form>
 
