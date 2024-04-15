@@ -77,5 +77,19 @@
             <input type="submit" value="Confirm">
         </form>
     </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Retrieve form data
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            if (email === "valid_email@example.com" && password === "password") {
+                window.location.href = "view_mortgage-product.php";
+            } else {
+                alert("Invalid email or password. Please try again.");
+            }
+        });
+    </script>
 </body>
 </html>
