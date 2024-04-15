@@ -32,7 +32,7 @@
             // Check if the query returns any rows
             if ($result->fetchArray(SQLITE3_ASSOC)) {
                 // Redirect to another page upon successful login
-                header("Location: home-page.html"); // Change 'dashboard.php' to your desired page
+                header("Location: view_mortgage-product.php"); // Change 'dashboard.php' to your desired page
                 exit();
             } else {
                 // Handle invalid credentials
@@ -77,19 +77,5 @@
             <input type="submit" value="Confirm">
         </form>
     </div>
-    <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent the form from submitting
-
-            // Retrieve form data
-            var email = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-            if (email === "valid_email@example.com" && password === "password") {
-                window.location.href = "view_mortgage-product.php";
-            } else {
-                alert("Invalid email or password. Please try again.");
-            }
-        });
-    </script>
 </body>
 </html>
