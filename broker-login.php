@@ -10,11 +10,7 @@
     <header>
         <nav>
             <ul>
-                <li><a href="home-page-prospective.html">Home</a></li>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="create-account.php">Create an Account</a></li>
-                <li><a href="broker-login.php">Broker Login</a></li>
-                <li><a href="mortgage-product.php">Mortgage Product</a></li>
+                <li><a href="login.php">Back</a></li>
             </ul>
         </nav>
     </header>
