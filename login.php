@@ -1,49 +1,3 @@
-<?php
-    // Assuming you have a database connection established
-    // You should replace these with your actual database connection code
-    $path = 'C:/xampp/htdocs/Stage-3-1/Isaac Database.db';
-    $realPath = realpath($path);
-
-    // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Retrieve form data
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        // Check if the database file exists
-        if ($realPath === false) {
-            die("The database file does not exist.");
-        }
-
-        // Open SQLite database connection
-        $db = new SQLite3($realPath);
-
-        // Check if the connection is successful
-        if (!$db) {
-            echo "Error: Unable to open database.";
-        } else {
-            // Query the user table to check if the provided credentials are valid
-            $query = "SELECT * FROM user WHERE email=:email AND password=:password";
-            $stmt = $db->prepare($query);
-            $stmt->bindValue(':email', $email, SQLITE3_TEXT);
-            $stmt->bindValue(':password', $password, SQLITE3_TEXT);
-            $result = $stmt->execute();
-
-            // Check if the query returns any rows
-            if ($result->fetchArray(SQLITE3_ASSOC)) {
-                // Redirect to another page upon successful login
-                header("Location: view_mortgage-product.php"); // Change 'dashboard.php' to your desired page
-                exit();
-            } else {
-                // Handle invalid credentials
-                echo "Invalid email or password.";
-            }
-
-            // Close the database connection
-            $db->close();
-        }
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +6,27 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Additional styles here */
+        .broker-login-box {
+            margin-top: 20px;
+        }
+        .broker-login-box h2 {
+            margin-bottom: 10px;
+        }
+        .broker-login-box p {
+            margin-bottom: 20px;
+        }
+        .broker-login-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .broker-login-button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -66,16 +40,25 @@
         </nav>
     </header>
 
+    <div class="left-background"></div> 
+    <div class="right-background"></div> 
+    
     <div class="container">
-        <div class="left-background"></div> 
-        <div class="right-background"></div> 
-        
         <h1>Login</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="text" id="email" name="email" placeholder="Email">
+            <br><br>
             <input type="password" id="password" name="password" placeholder="Password">
+            <br><br>
             <input type="submit" value="Confirm">
         </form>
+
+        <!-- Broker Login Box -->
+        <div class="broker-login-box">
+            <h2>Broker Login</h2>
+            <p>If you are a broker, please login below:</p>
+            <a class="broker-login-button" href="broker-login.php">Broker Login</a>
+        </div>
     </div>
 </body>
 </html>
