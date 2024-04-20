@@ -63,7 +63,7 @@
         </div>
         <!-- Edited create mortgage product button -->
         <div class="create-button">
-            <a href="mortgage-product.php">Choose Mortgage Products</a>
+            <a href="mortgage-product-table.php">Choose Mortgage Products</a>
         </div>
     </div>
 </body>

@@ -101,9 +101,6 @@
                     ?>
                 </tbody>
             </table>
-            <div class="delete-button">
-                <button type="submit" name="delete_products">Delete Selected Products</button>
-            </div>
             <div class="confirm-button">
                 <button type="submit" name="confirm_selection">Confirm Selection</button>
             </div>
@@ -111,31 +108,12 @@
     </div>
 
     <div class="create-button">
-        <a href="create-mortgage-product.php">Mortgage Product Creation</a>
+        <a href="user-picked-products.php">Mortgage Product Creation</a>
     </div>
 </body>
 </html>
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_products'])) {
-
-    if (isset($_POST['selected_products'])) {
-        $db = new PDO("sqlite:C:/xampp/htdocs/Stage-3-1/Isaac Database.db");
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $sql = "DELETE FROM mortgage_product WHERE mortgage_product_id IN (".implode(',', $_POST['selected_products']).")";
-
-        if ($db->exec($sql) !== false) {
-            echo "<script>alert('Selected products deleted successfully!');</script>";
-            echo "<script>window.location.href = 'mortgage-product.php';</script>";
-            exit;
-        } else {
-            echo "<script>alert('Error deleting selected products. Please try again.');</script>";
-        }
-    } else {
-        echo "<script>alert('No products selected for deletion.');</script>";
-    }
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm_selection'])) {
     
@@ -144,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm_selection'])) 
         if (count($_POST['selected_products']) <= 3) {
          
             $selected_products = implode(',', $_POST['selected_products']);
-            header("Location: display-selected-products.php?products=$selected_products");
+            header("Location: user-picked-products.php?products=$selected_products");
             exit;
         } else {
             echo "<script>alert('You can only select up to three products.');</script>";
