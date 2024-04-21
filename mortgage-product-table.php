@@ -1,3 +1,25 @@
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm_selection'])) {
+    
+    if (isset($_POST['selected_products'])) {
+       
+        if (count($_POST['selected_products']) <= 3) {
+         
+            $selected_products = implode(',', $_POST['selected_products']);
+            header("Location: user-picked-products.php?products=$selected_products");
+            exit;
+        } else {
+            echo "<script>alert('You can only select up to three products.');</script>";
+        }
+    } else {
+        echo "<script>alert('No products selected.');</script>";
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,22 +135,3 @@
 </body>
 </html>
 
-<?php
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm_selection'])) {
-    
-    if (isset($_POST['selected_products'])) {
-       
-        if (count($_POST['selected_products']) <= 3) {
-         
-            $selected_products = implode(',', $_POST['selected_products']);
-            header("Location: user-picked-products.php?products=$selected_products");
-            exit;
-        } else {
-            echo "<script>alert('You can only select up to three products.');</script>";
-        }
-    } else {
-        echo "<script>alert('No products selected.');</script>";
-    }
-}
-?>
