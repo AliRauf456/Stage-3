@@ -24,8 +24,11 @@ if (isset($_POST['yes'])) {
     // Close the database connection
     $db = null;
     
+    // Set a session variable to indicate account deletion success
+    $_SESSION['account_deleted'] = true;
+    
     // Redirect to a confirmation page
-    header("Location: login.php");
+    header("Location: successful-delete.html");
     exit();
 }
 
@@ -36,7 +39,6 @@ if (isset($_POST['no'])) {
     exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +51,7 @@ if (isset($_POST['no'])) {
     <header>
         <nav>
             <ul>
-                <li><a href="log-out.php">Back</a></li>
+                <li><a href="log-out.php">Log out</a></li>
             </ul>
         </nav>
     </header>
