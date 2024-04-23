@@ -21,13 +21,21 @@
         .button-container button {
             margin-right: 10px;
         }
+        .delete-account-button {
+            background-color: #ff6347; /* Red color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="log-out.html">Log out</a></li>
+                <li><a href="log-out.php">Log out</a></li>
             </ul>
         </nav>
     </header>
@@ -42,6 +50,10 @@
             <a href="view_mortgage-product.php"><button>No</button></a>
             <a href="login.php"><button>Yes</button></a>
         </div>
+        <!-- Delete Account functionality -->
+        <form action="confirm-delete-account.php" method="post" class="button-container">
+            <input type="submit" class="delete-account-button" name="delete_account" value="Delete Account">
+        </form>
     </div>
 </body>
 </html>

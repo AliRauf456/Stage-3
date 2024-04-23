@@ -63,8 +63,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['confirm_selection'])) 
     <header>
         <nav>
             <ul>
-                <li><a href="mortgage-product.php">Home</a></li>
-                <li><a href="broker-log-out.html">Sign Out</a></li>
+                <li><a href="view_mortgage-product.php">Home</a></li>
+                <li><a href="log-out.php">Sign Out</a></li>
             </ul>
         </nav>
     </header>
