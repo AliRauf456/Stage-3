@@ -24,29 +24,31 @@
         </header>
         <div class="content">
             <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $employeeID = $_POST['employeeID'];
-                $password = $_POST['password'];
-
-                $db = new PDO("sqlite:C:/xampp/Data/Mortgage Database.db");
-                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                $stmt = $db->prepare("SELECT * FROM broker WHERE brokerid = :employeeID AND password = :password");
-
-                $stmt->bindParam(':employeeID', $employeeID);
-                $stmt->bindParam(':password', $password);
-                $stmt->execute();
-
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                if ($row) {
-                    header("Location: mortgage-product.php");
-                    exit();
-                } else {
-                    echo "<div id='errorMessage'>Invalid Employee ID or Password.</div>";
-                }
-            }
-            ?>
+           if ($_SERVER["REQUEST_METHOD"] == "POST") {
+               $employeeID = $_POST['employeeID'];
+               $password = $_POST['password'];
+           
+               // Corrected database path and name
+               $db = new PDO("sqlite:C:/xampp/htdocs/latest 18/Stage-3/Isaac Database.db");
+               $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           
+               $stmt = $db->prepare("SELECT * FROM Brokers WHERE broker_id = :employeeID AND password = :password");
+           
+               $stmt->bindParam(':employeeID', $employeeID);
+               $stmt->bindParam(':password', $password);
+               $stmt->execute();
+           
+               $row = $stmt->fetch(PDO::FETCH_ASSOC);
+           
+               if ($row) {
+                   header("Location: mortgage-product.php");
+                   exit();
+               } else {
+                   echo "<div id='errorMessage'>Invalid Employee ID or Password.</div>";
+               }
+           }
+           ?>
+           
             <form method="post">
                 <div style="margin-top: 20px;"> 
                     <label for="employeeID">Employee ID:</label>

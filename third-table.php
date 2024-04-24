@@ -1,3 +1,11 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['generate_quote'])) {
+    $selected_product_id = $_POST['generate_quote'];
+    header("Location: mortgage-quote-generator.php?product_id=$selected_product_id");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +20,7 @@
             width: 80%; 
         }
         
-        table {
+        table {  
             border-collapse: collapse;
             width: 100%; 
         }
@@ -31,7 +39,7 @@
             margin-top: 20px;
         }
 
-        .quote-button {
+        .confirm-button {
             text-align: center;
             margin-top: 20px;
         }
@@ -52,12 +60,6 @@
 
     <div class="title-container">
         <h1>Mortgage Products</h1>
-    </div>
-
-    <div class="quote-button">
-        <form method="post" action="mortgage-quote-generator.php">
-            <button type="submit" name="generate_quote">Generate Quote</button>
-        </form>
     </div>
 
     <div class="table-container">
@@ -82,12 +84,10 @@
                     $db = new PDO('sqlite:C:/xampp/htdocs/latest 18/Stage-3/Isaac Database.db');
                     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                    $sql = "SELECT mortgage_product_id, product_name, interest_rate, secondary_interest_rate, loan_term, secondary_loan_term, maximum_loan_amount, minimum_down_payment, credit_score, mortgage_type FROM mortgage_product";
+                    $sql = "SELECT mortgage_product_id, product_name, interest_rate, secondary_interest_rate, loan_term, maximum_loan_amount, minimum_down_payment, credit_score, mortgage_type FROM mortgage_product";
 
                     $stmt = $db->prepare($sql);
-
                     $stmt->execute();
-
                     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     foreach ($rows as $row) {
@@ -97,48 +97,22 @@
                         echo "<td>{$row['interest_rate']}</td>";
                         echo "<td>{$row['secondary_interest_rate']}</td>";
                         echo "<td>{$row['loan_term']}</td>";
-                        echo "<td>{$row['secondary_loan_term']}</td>";
                         echo "<td>{$row['maximum_loan_amount']}</td>";
                         echo "<td>{$row['minimum_down_payment']}</td>";
                         echo "<td>{$row['credit_score']}</td>";
                         echo "<td>{$row['mortgage_type']}</td>";
                         echo "<td><input type='checkbox' name='selected_products[]' value='{$row['mortgage_product_id']}'></td>";
+                        echo "<td><button type='submit' name='generate_quote' value='{$row['mortgage_product_id']}'>Generate Quote</button></td>";
                         echo "</tr>";
                     }
                     ?>
                 </tbody>
             </table>
-            <div class="delete-button">
-                <button type="submit" name="delete_products">Delete Selected Products</button>
-            </div>
         </form>
     </div>
 
     <div class="create-button">
-        <a href="create-mortgage-product.php">Mortgage Product Creation</a>
+        <a href="user-picked-products.php">Mortgage Product Creation</a>
     </div>
 </body>
 </html>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_products'])) {
-
-    if (isset($_POST['selected_products'])) {
-        $db = new PDO("sqlite:C:/xampp/htdocs/latest 18/Stage-3/Isaac Database.db");
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        $sql = "DELETE FROM mortgage_product WHERE mortgage_product_id IN (".implode(',', $_POST['selected_products']).")";
-
-        if ($db->exec($sql) !== false) {
-            echo "<script>alert('Selected products deleted successfully!');</script>";
-            echo "<script>window.location.href = 'mortgage-product.php';</script>";
-            exit;
-        } else {
-            echo "<script>alert('Error deleting selected products. Please try again.');</script>";
-        }
-    } else {
-        echo "<script>alert('No products selected for deletion.');</script>";
-    }
-}
-
-?>

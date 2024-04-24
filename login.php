@@ -1,7 +1,7 @@
 <?php
     // Assuming you have a database connection established
     // You should replace these with your actual database connection code
-    $path = 'C:/xampp/htdocs/Stage-3-1/Isaac Database.db';
+    $path = 'C:\xampp\htdocs\latest 18\Stage-3\Isaac Database.db';
     $realPath = realpath($path);
 
     // Initialize error message variable
@@ -33,13 +33,17 @@
             $result = $stmt->execute();
 
             // Check if the query returns any rows
-            if (!$result->fetchArray(SQLITE3_ASSOC)) {
+            if ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                // Store user ID in session upon successful login
+                session_start();
+                $_SESSION['user_id'] = $row['user_id'];
+
+                // Redirect to quotes2 upon successful login
+                header("Location: quotes2.php");
+                exit();
+            } else {
                 // Set error message
                 $error_message = "Invalid email or password.";
-            } else {
-                // Redirect to another page upon successful login
-                header("Location: view_mortgage-product.php"); // Change 'dashboard.php' to your desired page
-                exit();
             }
 
             // Close the database connection
@@ -47,6 +51,7 @@
         }
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

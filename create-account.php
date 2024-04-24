@@ -32,7 +32,7 @@
 
         <?php
         // Path validation
-        $path = 'C:\xampp\htdocs\Stage-3-1\Isaac Database.db';
+        $path = 'C:\xampp\htdocs\latest 18\Stage-3\Isaac Database.db';
         $realPath = realpath($path);
 
         if ($realPath === false) {

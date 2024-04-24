@@ -26,40 +26,62 @@
 
     <div class="container">
         <?php
+        $dsn = 'sqlite:C:/xampp/htdocs/latest 18/Stage-3/Isaac Database.db';
+
+        try {
+            // Create a new PDO instance
+            $db = new PDO($dsn);
+            
+            // Set PDO error mode to exception
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            // Display a success message if connected successfully
+            echo "Connected to the database successfully";
+        } catch(PDOException $e) {
+            // Display an error message if connection fails
+            echo "Connection failed: " . $e->getMessage();
+        }
+        
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Retrieve form data
             $productName = $_POST['product_name'];
             $interestRate = $_POST['interest_rate'];
             $secondaryInterestRate = $_POST['secondary_interest_rate'];
             $loanTerm = $_POST['loan_term'];
+            $secondaryLoanTerm = $_POST['secondary_loan_term'];
             $maximumLoanAmount = $_POST['maximum_loan_amount'];
             $minimumDownPayment = $_POST['minimum_down_payment'];
             $creditScore = $_POST['credit_score'];
             $mortgageType = $_POST['mortgage_type'];
 
-            if (!is_numeric($interestRate) || !is_numeric($secondaryInterestRate) || !is_numeric($maximumLoanAmount) || !ctype_digit($loanTerm) || !is_numeric($minimumDownPayment) || !is_numeric($creditScore)) {
-                echo "Invalid input. Please enter valid numeric values for interest rate, secondary interest rate, maximum loan amount, loan term (a positive integer), minimum down payment, and credit score.";
-            } else {
-                $db = new PDO("sqlite:C:/xampp/htdocs/Stage-3-1/Isaac Database.db");
-                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                $sql = "INSERT INTO mortgage_product (product_name, interest_rate, secondary_interest_rate, loan_term, maximum_loan_amount, minimum_down_payment, credit_score, mortgage_type) VALUES (:product_name, :interest_rate, :secondary_interest_rate, :loan_term, :maximum_loan_amount, :minimum_down_payment, :credit_score, :mortgage_type)";
-
+            try {
+                // Prepare an SQL statement to insert data into the database
+                $sql = "INSERT INTO mortgage_product (product_name, interest_rate, secondary_interest_rate, loan_term, secondary_loan_term, maximum_loan_amount, minimum_down_payment, credit_score, mortgage_type)
+                        VALUES (:product_name, :interest_rate, :secondary_interest_rate, :loan_term, :secondary_loan_term, :maximum_loan_amount, :minimum_down_payment, :credit_score, :mortgage_type)";
+                
+                // Prepare the statement
                 $stmt = $db->prepare($sql);
-
+                
+                // Bind parameters to the prepared statement
                 $stmt->bindParam(':product_name', $productName);
                 $stmt->bindParam(':interest_rate', $interestRate);
                 $stmt->bindParam(':secondary_interest_rate', $secondaryInterestRate);
                 $stmt->bindParam(':loan_term', $loanTerm);
+                $stmt->bindParam(':secondary_loan_term', $secondaryLoanTerm);
                 $stmt->bindParam(':maximum_loan_amount', $maximumLoanAmount);
                 $stmt->bindParam(':minimum_down_payment', $minimumDownPayment);
                 $stmt->bindParam(':credit_score', $creditScore);
                 $stmt->bindParam(':mortgage_type', $mortgageType);
-
-                if ($stmt->execute()) {
-                    echo "Mortgage product created successfully!";
-                } else {
-                    echo "Error creating mortgage product. Please try again.";
-                }
+                
+                // Execute the statement
+                $stmt->execute();
+                
+                // Display a success message
+                echo "Mortgage product created successfully!";
+            } catch (PDOException $e) {
+                // Display an error message if insertion fails
+                echo "Error creating mortgage product: " . $e->getMessage();
             }
         }
         ?>
@@ -82,6 +104,11 @@
             <div style="margin-top: 20px; margin-bottom: 20px;"> 
                 <label for="loan_term">Loan Term (months):</label>
                 <input type="number" id="loan_term" name="loan_term" placeholder="Enter Loan Term" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="secondary_loan_term">Secondary Loan Term (months):</label>
+                <input type="number" id="secondary_loan_term" name="secondary_loan_term" placeholder="Enter Secondary Loan Term" required>
             </div>
             
             <div class="form-group">
