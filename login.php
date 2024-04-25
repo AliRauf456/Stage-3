@@ -1,10 +1,8 @@
 <?php
-    // Assuming you have a database connection established
-    // You should replace these with your actual database connection code
+   
     $path = 'C:\xampp\htdocs\latest 18\Stage-3\Isaac Database.db';
     $realPath = realpath($path);
 
-    // Initialize error message variable
     $error_message = "";
 
     // Check if the form is submitted
@@ -37,6 +35,7 @@
                 // Store user ID in session upon successful login
                 session_start();
                 $_SESSION['user_id'] = $row['user_id'];
+                echo "User ID: " . $_SESSION['user_id'];
 
                 // Redirect to quotes2 upon successful login
                 header("Location: quotes2.php");

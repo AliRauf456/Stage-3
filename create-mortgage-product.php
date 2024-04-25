@@ -77,10 +77,8 @@
                 // Execute the statement
                 $stmt->execute();
                 
-                // Display a success message
                 echo "Mortgage product created successfully!";
             } catch (PDOException $e) {
-                // Display an error message if insertion fails
                 echo "Error creating mortgage product: " . $e->getMessage();
             }
         }

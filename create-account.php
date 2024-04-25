@@ -31,7 +31,6 @@
         </form>
 
         <?php
-        // Path validation
         $path = 'C:\xampp\htdocs\latest 18\Stage-3\Isaac Database.db';
         $realPath = realpath($path);
 

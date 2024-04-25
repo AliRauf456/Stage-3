@@ -18,14 +18,18 @@
     </style>
 </head>
 <body>
-    <header>
-    <nav>
+<header>
+        <nav>
             <ul>
-                <li><a href="log-out.html">Sign Out</a></li>
-                <li><a href="quotes2.php">financial details</a></li>
+    <li><a href="quotes2.php">financial details</a></li>
+    <li><a href="loan_details.php">Loan values</a></li>
+    <li><a href="mortgage-quote-generator.php"> calculator</a></li>
+    <li><a href="view_mortgage-product.php"> sorting</a></li>
+    <li><a href="mortgage-product-table.php"> product selection</a></li>
+    <li><a href="log-out.html"> sign out</a></li>
             </ul>
-    </nav>
-</header>
+        </nav>
+    </header>
 <div class="container">
         <div class="left-background"></div> 
         <div class="right-background"></div> 
@@ -34,7 +38,7 @@
         <label for="down_payment">Down Payment:</label>
         <input type="number" id="down_payment" name="down_payment" required><br>
 
-        <label for="loan_term">Loan Term (years):</label>
+        <label for="loan_term">Loan Term (months):</label>
         <input type="number" id="loan_term" name="loan_term" required><br>
 
         <label for="maximum_loan_amount">Maximum Loan Amount:</label>
@@ -44,17 +48,17 @@
     </form>
 
     <?php
-    // Your PHP code here
+ 
 
     // Path to the SQLite database
-    $path = 'sqlite:C:/xampp/htdocs/latest 18/Stage-3/Isaac Database.db';
+    $path = 'C:\xampp\htdocs\latest 18\Stage-3\Isaac Database.db';
     $realPath = realpath($path);
 
     if ($realPath === false) {
         die("The path '$path' does not exist.");
     }
 
-    // Check if the form is submitted
+    // Check if the form is submitteds
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Retrieve user input from the form
         $down_payment = $_POST["down_payment"];
@@ -93,7 +97,7 @@
                         echo '<div class="mortgage-product">';
                         echo '<div class="product-details">Mortgage Type: ' . $row["product_name"] . '</div>';
                         echo '<div class="product-details">Interest Rate: ' . $row["interest_rate"] . '%</div>';
-                        echo '<div class="product-details">Loan Term: ' . $row["loan_term"] . ' years</div>';
+                        echo '<div class="product-details">Loan Term: ' . $row["loan_term"] . ' months</div>';
                         echo '<div class="product-details">Maximum Loan Amount: £' . $row["maximum_loan_amount"] . '</div>';
                         echo '<div class="product-details">Minimum Down Payment: £' . $row["minimum_down_payment"] . '</div>';
                         echo '</div>';

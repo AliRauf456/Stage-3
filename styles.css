@@ -5,26 +5,9 @@ body {
     box-sizing: border-box;
 }
 
-.container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    text-align: center;
-}
-
-h1 {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* Header navigation styles */
-
 header {
-    background-color: #67DC89; /* Green color */
-    padding: 30px 0; /* Add padding to top and bottom */
+    background-color: #67DC89;
+    padding: 30px 0;
 }
 
 header nav ul {
@@ -48,27 +31,67 @@ header nav ul li a {
 header nav ul li a:hover {
     background-color: #2db734;
 }
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="submit"] {
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Align text to left */
+}
+
+.form-group label {
     display: block;
-    width: calc(100% - 20px);
-    margin: 10px auto;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
     padding: 10px;
+    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+
 input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
     background-color: #67DC89;
     color: #fff;
+    border: none;
+    border-radius: 3px;
     cursor: pointer;
 }
+
 input[type="submit"]:hover {
     background-color: #1ea537;
 }
-p {
-    text-align: center;
+
+.error-message, .success-message {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.error-message {
+    background-color: #f44336;
+    color: white;
+}
+
+.success-message {
+    background-color: #4CAF50;
+    color: white;
 }
 
 .left-background {
@@ -90,31 +113,3 @@ p {
     background-color: #4CAF50; /* Green color */
     z-index: -1; /* Move behind other content */
 }
-
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 20px;
-}
-
-.product-box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-}
-
-.create-button {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.create-button a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-

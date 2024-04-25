@@ -82,11 +82,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['generate_quote'])) {
     </style>
 </head>
 <body>
-    <header>
+<header>
         <nav>
             <ul>
-                <li><a href="mortgage-product.php">Home</a></li>
-                <li><a href="broker-log-out.html">Sign Out</a></li>
+    <li><a href="quotes2.php">financial details</a></li>
+    <li><a href="loan_details.php">Loan values</a></li>
+    <li><a href="mortgage-quote-generator.php"> calculator</a></li>
+    <li><a href="view_mortgage-product.php"> sorting</a></li>
+    <li><a href="mortgage-product-table.php"> product selection</a></li>
+    <li><a href="log-out.html"> sign out</a></li>
             </ul>
         </nav>
     </header>

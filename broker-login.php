@@ -28,7 +28,7 @@
                $employeeID = $_POST['employeeID'];
                $password = $_POST['password'];
            
-               // Corrected database path and name
+    
                $db = new PDO("sqlite:C:/xampp/htdocs/latest 18/Stage-3/Isaac Database.db");
                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
            
