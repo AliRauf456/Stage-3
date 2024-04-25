@@ -28,10 +28,10 @@
                 $employeeID = $_POST['employeeID'];
                 $password = $_POST['password'];
 
-                $db = new PDO("sqlite:C:/xampp/Data/Mortgage Database.db");
+                $db = new PDO("sqlite:/xampp/htdocs/Stage-3-1/Isaac Database.db");
                 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                $stmt = $db->prepare("SELECT * FROM broker WHERE brokerid = :employeeID AND password = :password");
+                $stmt = $db->prepare("SELECT * FROM Brokers WHERE broker_id = :employeeID AND password = :password");
 
                 $stmt->bindParam(':employeeID', $employeeID);
                 $stmt->bindParam(':password', $password);
